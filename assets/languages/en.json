@@ -1,0 +1,9 @@
+﻿{
+  "menu": {
+    "title": "Sudoku",
+    "single_player": "Singleplayer",
+    "multiplayer": "Multiplayer",
+    "settings": "Settings",
+    "stats": "Stats"
+  }
+}
