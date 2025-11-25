@@ -5,19 +5,17 @@
     }
     
     create() {
+        this.bg = this.add.image(0, 0, 'bg_menu').setOrigin(0);
         
-        const width = this.scale.width;
-        const height = this.scale.height;
-        
-        const bg = this.add.image(width / 2, height / 2, 'bg_menu');
-        bg.setDisplaySize(width, height);
-        this.languageChange(width, height);
+        this.languageChange();
 
-        this.add.text(width / 2, height / 4, Language.t("menu.title"), {
+        this.titleText = this.add.text(0, 0, Language.t("menu.title"), {
             fontFamily: 'Arial',
-            fontSize: '48px',
+            fontSize: '5rem',
             color: '#ffffff'
         }).setOrigin(0.5);
+        
+        this.menuButtons = [];
         
         const menuItems = [
             {key: "menu.single_player", scene: "SinglePlayerScene"},
@@ -26,41 +24,77 @@
             {key: "menu.stats", scene: ""},
         ];
         
-        const startY = height / 2 - 60;
-        const stepY = 40;
-        
-        menuItems.forEach((item, index) => {
-            const option = this.add.text(width / 2, startY + index * stepY, Language.t(item.key), {
-                fontFamily: 'Arial',
-                fontSize: '28px',
-                color: '#ffffff'
-            }).setOrigin(0.5);
-            
-            option.setInteractive({useHandCursor: true});
-            
-            option.on('pointerover', () => {
-                option.setStyle({color: '#ffff00'});
-            })
-            
-            option.on('pointerout', () => {
-                option.setStyle({color: '#ffffff'});
-            })
-            
-            option.on('pointerup', () => {
-                this.scene.start(item.scene);
+        menuItems.forEach((item) => {
+            const container = this.createButton(Language.t(item.key), () => {
+               this.scene.start(item.scene); 
             });
-
+            this.menuButtons.push(container);
         });
+        
+        this.updateLayout(this.scale.gameSize);
+        
+        this.scale.on('resize', this.updateLayout, this);
     }
 
-    languageChange = (width, height) => {
+    createButton = (label, onClick) => {
+        const container = this.add.container(0, 0);
+        
+        
+        const txt = this.add.text(0, 0, label, {
+            fontFamily: 'Arial',
+            fontSize: '2rem',
+            color: '#ffffff'
+        }).setOrigin(0.5);
+        
+        container.add(txt);
+        container.setSize(260, 50);
+        container.setInteractive({ useHandCursor: true });
+
+        container.on('pointerover', () => bg.setFillStyle(0x6666ff));
+        container.on('pointerout',  () => bg.setFillStyle(0x4444aa));
+        container.on('pointerup', onClick);
+        
+        return container;
+    }
+
+    updateLayout = (gameSize) => {
+        const width  = gameSize.width;
+        const height = gameSize.height;
+        const titleOffset = 0.2;
+        
+        
+        // фон на весь экран
+        if (this.bg) {
+            this.bg.setDisplaySize(width, height);
+        }
+
+        // заголовок: сверху по центру
+        if (this.titleText) {
+            this.titleText.setPosition(width / 2, height * titleOffset);
+        }
+
+        // кнопки: столбиком по центру
+        if (this.menuButtons && this.menuButtons.length > 0) {
+            const totalButtons = this.menuButtons.length;
+            const stepY = 60;
+            const totalHeight = (totalButtons - 1) * stepY;
+            let startY = height / 2 - totalHeight / 2;
+
+            this.menuButtons.forEach((btn, index) => {
+                btn.x = width / 2;
+                btn.y = startY + index * stepY;
+            });
+        }
+    }
+    
+    languageChange = () => {
         var languageToChange = localStorage.getItem('lang') === 'ru' ? 'EN' : 'RU';
         console.log(localStorage.getItem('lang'))
-        const langButton = this.add.text(700, 500, languageToChange, {
+        const langButton = this.add.text(0, 0, languageToChange, {
             ontFamily: 'Arial',
             fontSize: '18px',
             color: '#ffffff'
-        }).setOrigin(0.5);
+        }).setOrigin(1, 0).setPosition(this.scale.gameSize.width - 20, 20);
 
         langButton.setInteractive();
         langButton.on('pointerover', () => {
