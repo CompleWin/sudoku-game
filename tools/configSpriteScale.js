@@ -6,6 +6,9 @@ const configSpriteScale = {
     titleOffset: 0.2,
     textBaseSize: 80,
     titleBaseScale: 3,
+    baseLogoScale: 3,
+    langButtonScale: 1,
+    langButtonPadding: 20,
 };
 
 export default configSpriteScale;

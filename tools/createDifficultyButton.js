@@ -1,4 +1,4 @@
-﻿import configDifficultyButton from "./configDifficultyButton";
+﻿import configDifficultyButton from "./configDifficultyButton.js";
 
 const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     const container = scene.add.container(0, 0);
@@ -6,10 +6,10 @@ const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     const width = configDifficultyButton.width;
     const height = configDifficultyButton.height;
 
-    const text = this.add.text(0, 0, label, {
+    const text = scene.add.text(0, 0, label, {
         fontFamily: 'Arial',
         fontSize: '32px',
-        color: '#ffffff'
+        color: color
     }).setOrigin(0.5);
 
     container.add(text);
@@ -18,10 +18,12 @@ const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
 
     container.on('pointerover', () => {
         container.setScale(1.05);
+        text.setColor(hoverColor);
     });
 
     container.on('pointerout', () => {
         container.setScale(1.0);
+        text.setColor(color);
     });
 
     container.on('pointerup', onClick);

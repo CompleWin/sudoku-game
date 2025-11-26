@@ -5,6 +5,7 @@ import createBackgroundImage from "../tools/createBackgroundImage.js";
 import configSpriteScale from "../tools/ConfigSpriteScale.js";
 import updateLayout from "../tools/updateLayout.js";
 import Language from "../language.js";
+import autoLayoutEvent from "../tools/autoLayoutEvent.js";
 
 export default class MenuScene extends Phaser.Scene {
 
@@ -67,13 +68,9 @@ export default class MenuScene extends Phaser.Scene {
                 this.menuButtons.push(container);
             });
         }
-        
-        
 
         
-        updateLayout(this);
-
-        this.scale.on('resize', updateLayout, this);
+        autoLayoutEvent(this, updateLayout);
     }
     
     languageChange = () => {

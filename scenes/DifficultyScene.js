@@ -1,11 +1,15 @@
 import createBackgroundImage from "../tools/createBackgroundImage.js";
 import getResponsiveFontSize from "../tools/getResponsiveFontSize.js";
-import createDifficultyButton from "../tools/createDifficultyButton";
+import createDifficultyButton from "../tools/createDifficultyButton.js";
+import updateLayout from "../tools/updateLayout.js";
+import autoLayoutEvent from "../tools/autoLayoutEvent.js";
+
 
 export default class DifficultyScene extends Phaser.Scene {
     
     constructor() {
         super('DifficultyScene');
+        this._onResize = null;
     }
     
     create() {
@@ -14,11 +18,11 @@ export default class DifficultyScene extends Phaser.Scene {
         createBackgroundImage(this);
         
         // Заглушка НАДО БУДЕТ ИСПРАВИТЬ
-        this.titleText = this.add.text(width / 2, height * 0.2, "Выберите сложность", {
+        this.difficultyTitleText = this.add.text(0, 0, "Выберите сложность", {
             fontFamily: 'Arial',
-            fontSize: getResponsiveFontSize(48) + 'px',
+            fontSize: getResponsiveFontSize(this, 48) + 'px',
             color: '#ffffff'
-        });
+        }).setOrigin(0.5, 0);
         
         this.difficultyButtons = [];
         
@@ -37,7 +41,7 @@ export default class DifficultyScene extends Phaser.Scene {
 
         // Кнопка назад
         this.backButton = this.add.text(20, 20, '← Назад', {
-            fontSize: getResponsiveFontSize(20) + 'px',
+            fontSize: getResponsiveFontSize(this, 20) + 'px',
             color: '#ffffff',
             fontFamily: 'Arial'
         })
@@ -48,9 +52,6 @@ export default class DifficultyScene extends Phaser.Scene {
         this.backButton.on('pointerout', () => this.backButton.setColor('#ffffff'));
         this.backButton.on('pointerup', () => this.scene.start('MenuScene'));
 
-        this.updateLayout();
-        this.scale.on('resize', this.updateLayout, this);
-        
-        
+        autoLayoutEvent(this, updateLayout);
     }
 }
