@@ -1,4 +1,4 @@
-﻿class Language {
+﻿export default class Language {
     static data = {};
     
     static t(path) {

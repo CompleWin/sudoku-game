@@ -2,20 +2,42 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sudoku</title>
     <script src="//cdn.jsdelivr.net/npm/phaser@3.80.0/dist/phaser.js"></script>
-    <script src="scenes/PreloadScene.js"></script>
-    <script src="scenes/MenuScene.js"></script>
-    <script src="language.js"></script>
-    <script src="main.js"></script>
+    <script type="module" src="main.js"></script>
     <style>
-        body { 
-            margin: 0; 
-            font-size: 16px;
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #game-container {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        canvas {
+            display: block;
+            max-width: 100%;
+            max-height: 100%;
         }
     </style>
 </head>
 <body>
-
+    <div id="game-container"></div>
 </body>
 </html>
