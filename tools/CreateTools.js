@@ -1,12 +1,13 @@
-﻿import {getResponsiveFontSize} from "./ResponsiveTools";
+﻿import {getResponsiveFontSize, getResponsiveScale} from "./ResponsiveTools.js";
+import configSpriteScale from "./configSpriteScale.js";
 
 const fontFamily = 'Arial';
 
-export function createButton(label, onClick) {
-    const container = this.add.container(0, 0);
+export function createButton(scene, label, onClick) {
+    const container = scene.add.container(0, 0);
 
     const fontSize = getResponsiveFontSize(32);
-    const txt = this.add.text(0, 0, label, {
+    const txt = scene.add.text(0, 0, label, {
         fontFamily: fontFamily,
         fontSize: fontSize + 'px',
         color: '#ffffff'
@@ -21,4 +22,23 @@ export function createButton(label, onClick) {
     container.on('pointerup', onClick);
 
     return container;
+}
+
+export function createSpriteButton(scene, atlasKey, textureKey, onClick) {
+    const baseScale = configSpriteScale.baseScale;
+    const hoverScale = configSpriteScale.hoverScale;
+
+    const scale = getResponsiveScale(scene,1);
+    const standartScale = baseScale * scale;
+    const pointOnScale = hoverScale * scale;
+
+    const img = scene.add.image(0, 0, atlasKey, textureKey)
+        .setInteractive({ useHandCursor: true })
+        .setScale(standartScale);
+
+    img.on('pointerover', () => img.setScale(pointOnScale));
+    img.on('pointerout', () => img.setScale(standartScale));
+    img.on('pointerup', onClick);
+
+    return img;
 }

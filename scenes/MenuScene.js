@@ -1,6 +1,8 @@
 ﻿import { getResponsiveScale, getResponsiveFontSize} from "../tools/ResponsiveTools.js";
+import { createSpriteButton } from "../tools/CreateTools.js";
+import createBackgroundImage from "../tools/createBackgroundImage.js";
+import configSpriteScale from "../tools/ConfigSpriteScale.js";
 import Language from "../language.js";
-
 
 export default class MenuScene extends Phaser.Scene {
 
@@ -11,102 +13,90 @@ export default class MenuScene extends Phaser.Scene {
     create() {
         const { width, height } = this.scale;
 
-        this.bg = this.add.image(0, 0, 'bg_menu')
-            .setOrigin(0)
-            .setDisplaySize(width, height);
+        // this.bg = this.add.image(0, 0, 'bg_menu')
+        //     .setOrigin(0)
+        //     .setDisplaySize(width, height);
 
+        createBackgroundImage(this);
+        
         this.languageChange();
 
         const titleFontSize = getResponsiveFontSize(this, 80);
         
-        this.titleText = this.add.text(width / 2, height * 0.2, Language.t("menu.title"), {
-            fontFamily: 'Arial',
-            fontSize: titleFontSize + 'px',
-            color: '#ffffff'
-        }).setOrigin(0.5);
-
+        const currentLanguage = (localStorage.getItem('lang') || 'ru').toLowerCase();
+        
+        this.titleSprite = this.add.image(
+            width / 2,
+            height * configSpriteScale.titleOffset,
+            'logo',
+            `logo_${currentLanguage}.png`
+        ).setOrigin(0.5);
+        
+        const scale = getResponsiveFontSize(this, 1);
+        this.titleSprite.setScale(configSpriteScale.titleBaseScale * scale);
+        
         this.menuButtons = [];
 
-        const menuItems = [
-            {key: "playButton", scene: "DifficultyScene"},
-            {key: "multiplayerButton", scene: ""},
-        ];
+        if (currentLanguage === 'ru') {
+            const menuItemsRu = [
+                {atlasKey: "uiButtons", key: "play_ru.png", scene: "DifficultyScene"},
+                {atlasKey: "uiButtons", key: "settings_ru.png", scene: ""},
+                {atlasKey: "uiButtons", key: "stats_ru.png", scene: ""},
+            ];
 
-        menuItems.forEach((item) => {
-            const container = this.createSpriteButton(item.key, () => {
-                this.scene.start(item.scene);
+            menuItemsRu.forEach((item) => {
+                const container = createSpriteButton(this, item.atlasKey, item.key, () => {
+                    this.scene.start(item.scene);
+                });
+                this.menuButtons.push(container);
             });
-            this.menuButtons.push(container);
-        });
+        } 
+        else {
+            const menuItemsEn = [
+                {atlasKey: "uiButtons", key: "play_en.png", scene: "DifficultyScene"},
+                {atlasKey: "uiButtons", key: "settings_en.png", scene: ""},
+                {atlasKey: "uiButtons", key: "stats_en.png", scene: ""},
+            ];
 
+            menuItemsEn.forEach((item) => {
+                const container = createSpriteButton(this, item.atlasKey, item.key, () => {
+                    this.scene.start(item.scene);
+                });
+                this.menuButtons.push(container);
+            });
+        }
+        
+        
+
+        
         this.updateLayout(this.scale.gameSize);
 
         this.scale.on('resize', this.updateLayout, this);
     }
-    
-    createButton = (label, onClick) => {
-        const container = this.add.container(0, 0);
 
-        const fontSize = getResponsiveFontSize(this, 32);
-        const txt = this.add.text(0, 0, label, {
-            fontFamily: 'Arial',
-            fontSize: fontSize + 'px',
-            color: '#ffffff'
-        }).setOrigin(0.5);
-
-        container.add(txt);
-        container.setSize(txt.width, txt.height);
-        container.setInteractive({ useHandCursor: true });
-
-        container.on('pointerover', () => txt.setScale(1.1));
-        container.on('pointerout',  () => txt.setScale(1.0));
-        container.on('pointerup', onClick);
-
-        return container;
-    }
-
-    createSpriteButton = (textureKey, onClick) => {
-        const baseScale = 3;
-        const hoverScale = 4;
-
-        const scale = getResponsiveScale(this,1);
-        const standartScale = baseScale * scale;
-        const pointOnScale = hoverScale * scale;
-
-        const img = this.add.image(0, 0, textureKey)
-            .setInteractive({ useHandCursor: true })
-            .setScale(standartScale);
-
-        img.on('pointerover', () => img.setScale(pointOnScale));
-        img.on('pointerout',  () => img.setScale(standartScale));
-        img.on('pointerup',   onClick);
-
-        return img;
-    }
-
-    updateLayout = (gameSize) => {
+    updateLayout = () => {
         const { width, height } = this.scale;
-        const titleOffset = 0.2;
+        const titleOffset = configSpriteScale.titleOffset;
 
         if (this.bg) {
             this.bg.setDisplaySize(width, height);
         }
 
         if (this.titleText) {
-            const titleFontSize = getResponsiveFontSize(this, 80);
+            const titleFontSize = getResponsiveFontSize(this, configSpriteScale.textBaseSize);
             this.titleText.setFontSize(titleFontSize);
             this.titleText.setPosition(width / 2, height * titleOffset);
         }
-
+        
         if (this.menuButtons && this.menuButtons.length > 0) {
             const totalButtons = this.menuButtons.length;
-            const stepY = getResponsiveFontSize(this, 100); // Относительное расстояние
+            const stepY = getResponsiveFontSize(this, configSpriteScale.baseStepY); // Относительное расстояние
             const totalHeight = (totalButtons - 1) * stepY;
             let startY = height / 2 - totalHeight / 2;
 
             // Обновляем масштаб и позицию каждой кнопки
             this.menuButtons.forEach((btn, index) => {
-                const baseScale = 3;
+                const baseScale = configSpriteScale.baseScale;
                 const scale = getResponsiveScale(this, 1);
                 btn.setScale(baseScale * scale);
                 btn.x = width / 2;
@@ -123,21 +113,18 @@ export default class MenuScene extends Phaser.Scene {
 
         var languageToChange = localStorage.getItem('lang') === 'ru' ? 'EN' : 'RU';
 
-        this.langButton = this.add.text(0, 0, languageToChange, {
-            fontFamily: 'Arial',
-            fontSize: fontSize + 'px',
-            color: '#ffffff'
-        }).setOrigin(1, 0)
+        this.langButton = this.add.image(0, 0, 'langUI', `${languageToChange.toLowerCase()}.png`)
+            .setOrigin(1, 0)
             .setPosition(width - paddingX, paddingY);
 
         this.langButton.setInteractive({ useHandCursor: true });
 
         this.langButton.on('pointerover', () => {
-            this.langButton.setStyle({color: '#ffff00'});
+            
         })
 
         this.langButton.on('pointerout', () => {
-            this.langButton.setStyle({color: '#ffffff'});
+            
         })
 
         this.langButton.on('pointerup', () => {
