@@ -1,7 +1,9 @@
-﻿import { getResponsiveScale, getResponsiveFontSize} from "../tools/ResponsiveTools.js";
-import { createSpriteButton } from "../tools/CreateTools.js";
+﻿import getResponsiveScale from "../tools/getResponsiveScale.js";
+import getResponsiveFontSize from "../tools/getResponsiveFontSize.js";
+import createSpriteButton  from "../tools/createSpriteButton.js";
 import createBackgroundImage from "../tools/createBackgroundImage.js";
 import configSpriteScale from "../tools/ConfigSpriteScale.js";
+import updateLayout from "../tools/updateLayout.js";
 import Language from "../language.js";
 
 export default class MenuScene extends Phaser.Scene {
@@ -69,42 +71,11 @@ export default class MenuScene extends Phaser.Scene {
         
 
         
-        this.updateLayout(this.scale.gameSize);
+        updateLayout(this);
 
-        this.scale.on('resize', this.updateLayout, this);
+        this.scale.on('resize', updateLayout, this);
     }
-
-    updateLayout = () => {
-        const { width, height } = this.scale;
-        const titleOffset = configSpriteScale.titleOffset;
-
-        if (this.bg) {
-            this.bg.setDisplaySize(width, height);
-        }
-
-        if (this.titleText) {
-            const titleFontSize = getResponsiveFontSize(this, configSpriteScale.textBaseSize);
-            this.titleText.setFontSize(titleFontSize);
-            this.titleText.setPosition(width / 2, height * titleOffset);
-        }
-        
-        if (this.menuButtons && this.menuButtons.length > 0) {
-            const totalButtons = this.menuButtons.length;
-            const stepY = getResponsiveFontSize(this, configSpriteScale.baseStepY); // Относительное расстояние
-            const totalHeight = (totalButtons - 1) * stepY;
-            let startY = height / 2 - totalHeight / 2;
-
-            // Обновляем масштаб и позицию каждой кнопки
-            this.menuButtons.forEach((btn, index) => {
-                const baseScale = configSpriteScale.baseScale;
-                const scale = getResponsiveScale(this, 1);
-                btn.setScale(baseScale * scale);
-                btn.x = width / 2;
-                btn.y = startY + index * stepY;
-            });
-        }
-    }
-
+    
     languageChange = () => {
         const { width } = this.scale;
         const paddingX = getResponsiveFontSize(this, 20);
