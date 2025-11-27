@@ -7,7 +7,7 @@ const showWinMessage = (scene) => {
     createBackgroundImage(scene);
 
     const text = scene.add.text(width / 2, height / 2, 'Победа!', {
-        fontSize: getResponsiveFontSize(48) + 'px',
+        fontSize: getResponsiveFontSize(scene,48) + 'px',
         color: '#2ecc71',
         fontFamily: 'Arial',
         fontStyle: 'bold'

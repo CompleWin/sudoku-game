@@ -1,4 +1,5 @@
 ﻿import checkWin from "./checkWin.js";
+import configSudoku from "../config/configSudoku.js";
 
 const placeNumber = (scene, num) => {
 
@@ -17,8 +18,10 @@ const placeNumber = (scene, num) => {
 
     // Создаем новый текст
     if (num !== 0) {
-        const x = col * scene.cellSize + scene.cellSize / 2;
-        const y = row * scene.cellSize + scene.cellSize / 2;
+        const cellSize = configSudoku.baseCellSize;
+
+        const x = col * cellSize + cellSize / 2;
+        const y = row * cellSize + cellSize / 2;
 
         const isCorrect = num === scene.solution[row][col];
 

@@ -1,6 +1,7 @@
 ﻿import configSpriteScale from "../config/configSpriteScale.js";
 import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
 import getResponsiveScale from "../responvisve/getResponsiveScale.js";
+import configSudoku from "../config/configSudoku.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -51,11 +52,11 @@ const updateLayout = (scene) => {
     }
 
     if (scene.gridContainer) {
-        const scale = getResponsiveScale(scene,1);
-        scene.cellSize = 50 * scale;
+        const scale = getResponsiveScale(scene, 1);
+        const baseCellSize = configSudoku.baseCellSize;
 
-        const gridWidth = scene.cellSize * 9;
-        const gridHeight = scene.cellSize * 9;
+        const gridWidth = baseCellSize * 9 * scale;
+        const gridHeight = baseCellSize * 9 * scale;
 
         scene.gridContainer.setScale(scale);
         scene.gridContainer.setPosition(

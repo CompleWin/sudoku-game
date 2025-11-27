@@ -7,8 +7,7 @@ const checkWin = (scene) => {
         }
     }
 
-    // Победа!
-    showWinMessage();
+    showWinMessage(scene);
 }
 
 export default checkWin;

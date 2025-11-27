@@ -1,8 +1,6 @@
 ﻿
 const removeNumbers = (board, difficulty) => {
 
-    console.log(difficulty);
-
     const cellsToRemove = {
         easy: 30,
         medium: 45,

@@ -45,6 +45,8 @@ export default class GameScene extends Phaser.Scene {
 
         this.selectedCell = {row: -1, col: -1};
 
+
+
         createSudokuGrid(this);
 
     }

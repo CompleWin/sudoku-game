@@ -5,11 +5,11 @@ const selectCell = (scene, row, col) => {
         const prevRow = scene.selectedCell.row;
         const prevCol = scene.selectedCell.col;
 
-        scene.cells[prevRow][prevCol].setFillStyle('#ffffff');
+        scene.cells[prevRow][prevCol].clearTint();
     }
 
     scene.selectedCell = {row, col};
-    scene.cells[row][col].setFillStyle('#e8f4f8');
+    scene.cells[row][col].setTint('#e8f4f8');
 }
 
 export default selectCell;
