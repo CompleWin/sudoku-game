@@ -1,8 +1,9 @@
-import createBackgroundImage from "../tools/createBackgroundImage.js";
-import getResponsiveFontSize from "../tools/getResponsiveFontSize.js";
-import createDifficultyButton from "../tools/createDifficultyButton.js";
+import createBackgroundImage from "../tools/create/createBackgroundImage.js";
+import getResponsiveFontSize from "../tools/responvisve/getResponsiveFontSize.js";
+import createDifficultyButton from "../tools/create/createDifficultyButton.js";
 import updateLayout from "../tools/updateLayout.js";
-import autoLayoutEvent from "../tools/autoLayoutEvent.js";
+import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
+import configSudoku from "../tools/config/configSudoku.js";
 
 
 export default class DifficultyScene extends Phaser.Scene {
@@ -25,11 +26,11 @@ export default class DifficultyScene extends Phaser.Scene {
         }).setOrigin(0.5, 0);
         
         this.difficultyButtons = [];
-        
+
         const difficulties = [
-            {key: 'easy', label: 'Легкий', color: '#59c27d', hoverColor: '#afbfff'},
-            {key: 'medium', label: 'Средний', color: '#ffb347', hoverColor: '#afbfff'},
-            {key: 'hard', label: 'Сложный', color: '#ff5a5a', hoverColor: '#afbfff'},
+            {key: configSudoku.difficulties[0], label: 'Легкий', color: '#59c27d', hoverColor: '#afbfff'},
+            {key: configSudoku.difficulties[1], label: 'Средний', color: '#ffb347', hoverColor: '#afbfff'},
+            {key: configSudoku.difficulties[2], label: 'Сложный', color: '#ff5a5a', hoverColor: '#afbfff'},
         ];
         
         difficulties.forEach(item => {

@@ -1,11 +1,11 @@
-﻿import getResponsiveScale from "../tools/getResponsiveScale.js";
-import getResponsiveFontSize from "../tools/getResponsiveFontSize.js";
-import createSpriteButton  from "../tools/createSpriteButton.js";
-import createBackgroundImage from "../tools/createBackgroundImage.js";
-import configSpriteScale from "../tools/ConfigSpriteScale.js";
+﻿import getResponsiveScale from "../tools/responvisve/getResponsiveScale.js";
+import getResponsiveFontSize from "../tools/responvisve/getResponsiveFontSize.js";
+import createSpriteButton  from "../tools/create/createSpriteButton.js";
+import createBackgroundImage from "../tools/create/createBackgroundImage.js";
+import configSpriteScale from "../tools/config/configSpriteScale.js";
 import updateLayout from "../tools/updateLayout.js";
 import Language from "../language.js";
-import autoLayoutEvent from "../tools/autoLayoutEvent.js";
+import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
 
 export default class MenuScene extends Phaser.Scene {
 

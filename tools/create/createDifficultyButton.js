@@ -1,4 +1,4 @@
-﻿import configDifficultyButton from "./configDifficultyButton.js";
+﻿import configDifficultyButton from "../config/configDifficultyButton.js";
 
 const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     const container = scene.add.container(0, 0);

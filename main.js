@@ -1,6 +1,7 @@
 ﻿import MenuScene from './scenes/MenuScene.js';
 import PreloadScene from './scenes/PreloadScene.js';
 import DifficultyScene from "./scenes/DifficultyScene.js";
+import GameScene from "./scenes/GameScene.js";
 import './language.js';
 
 
@@ -29,7 +30,8 @@ const config = {
     scene: [
         PreloadScene,
         MenuScene,
-        DifficultyScene
+        DifficultyScene,
+        GameScene,
     ]
 };
 

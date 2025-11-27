@@ -1,4 +1,4 @@
-﻿import getResponsiveFontSize from "./getResponsiveFontSize.js";
+﻿import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
 
 const createButton = (scene, label, onClick) => {
     const container = scene.add.container(0, 0);

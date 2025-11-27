@@ -1,5 +1,5 @@
-﻿import configSpriteScale from "./configSpriteScale.js";
-import getResponsiveScale from "./getResponsiveScale.js";
+﻿import configSpriteScale from "../config/configSpriteScale.js";
+import getResponsiveScale from "../responvisve/getResponsiveScale.js";
 
 const createSpriteButton = (scene, atlasKey, textureKey, onClick) => {
     const baseScale = configSpriteScale.baseScale;

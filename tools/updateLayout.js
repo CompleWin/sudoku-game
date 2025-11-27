@@ -1,6 +1,6 @@
-﻿import configSpriteScale from "./configSpriteScale.js";
-import getResponsiveFontSize from "./getResponsiveFontSize.js";
-import getResponsiveScale from "./getResponsiveScale.js";
+﻿import configSpriteScale from "./config/configSpriteScale.js";
+import getResponsiveFontSize from "./responvisve/getResponsiveFontSize.js";
+import getResponsiveScale from "./responvisve/getResponsiveScale.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
