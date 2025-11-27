@@ -3,7 +3,7 @@ import getResponsiveFontSize from "../tools/responvisve/getResponsiveFontSize.js
 import createSpriteButton  from "../tools/create/createSpriteButton.js";
 import createBackgroundImage from "../tools/create/createBackgroundImage.js";
 import configSpriteScale from "../tools/config/configSpriteScale.js";
-import updateLayout from "../tools/updateLayout.js";
+import updateLayout from "../tools/layout/updateLayout.js";
 import Language from "../language.js";
 import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
 

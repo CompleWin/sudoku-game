@@ -1,12 +1,13 @@
 ﻿import createBackgroundImage from "../tools/create/createBackgroundImage.js";
 import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
-import updateLayout from "../tools/updateLayout.js";
+import updateLayout from "../tools/layout/updateLayout.js";
 import findEmpty from "../tools/sudoku/findEmpty.js";
 import shuffle from "../tools/sudoku/shuffle.js";
 import configSudoku from "../tools/config/configSudoku.js";
 import createSudokuGrid from "../tools/sudoku/createSudokuGrid.js";
 import isValid from "../tools/sudoku/isValid.js";
 import removeNumbers from "../tools/sudoku/removeNumbers.js";
+import createSudokuUI from "../tools/sudoku/createSudokuUI.js";
 
 
 export default class GameScene extends Phaser.Scene {
@@ -26,6 +27,8 @@ export default class GameScene extends Phaser.Scene {
         createBackgroundImage(this);
 
         this.createSudoku();
+
+        createSudokuUI(this);
 
         autoLayoutEvent(this, updateLayout);
 

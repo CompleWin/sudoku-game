@@ -1,9 +1,10 @@
 import createBackgroundImage from "../tools/create/createBackgroundImage.js";
 import getResponsiveFontSize from "../tools/responvisve/getResponsiveFontSize.js";
 import createDifficultyButton from "../tools/create/createDifficultyButton.js";
-import updateLayout from "../tools/updateLayout.js";
+import updateLayout from "../tools/layout/updateLayout.js";
 import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
 import configSudoku from "../tools/config/configSudoku.js";
+import createBackButton from "../tools/create/createBackButton.js";
 
 
 export default class DifficultyScene extends Phaser.Scene {
@@ -40,18 +41,7 @@ export default class DifficultyScene extends Phaser.Scene {
             this.difficultyButtons.push(btn);
         })
 
-        // Кнопка назад
-        this.backButton = this.add.text(20, 20, '← Назад', {
-            fontSize: getResponsiveFontSize(this, 20) + 'px',
-            color: '#ffffff',
-            fontFamily: 'Arial'
-        })
-            .setOrigin(0)
-            .setInteractive({ useHandCursor: true });
-
-        this.backButton.on('pointerover', () => this.backButton.setColor('#3498db'));
-        this.backButton.on('pointerout', () => this.backButton.setColor('#ffffff'));
-        this.backButton.on('pointerup', () => this.scene.start('MenuScene'));
+        createBackButton(this);
 
         autoLayoutEvent(this, updateLayout);
     }
