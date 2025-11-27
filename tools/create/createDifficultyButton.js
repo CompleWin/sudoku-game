@@ -14,16 +14,25 @@ const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     }).setOrigin(0.5);
 
     container.add(text);
+
+    container._baseScaleX = container.scaleX;
+    container._baseScaleY = container.scaleY;
+
     container.setSize(width, height);
     container.setInteractive({ useHandCursor: true });
 
     container.on('pointerover', () => {
-        container.setScale(1.05);
+        const baseX = container._baseScaleX;
+        const baseY = container._baseScaleY;
+
+        container.setScale(baseX * 1.05, baseY * 1.05);
         text.setColor(hoverColor);
     });
 
     container.on('pointerout', () => {
-        container.setScale(1);
+        const baseX = container._baseScaleX;
+        const baseY = container._baseScaleY;
+        container.setScale(baseX, baseY);
         text.setColor(color);
     });
 

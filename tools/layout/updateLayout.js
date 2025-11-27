@@ -97,6 +97,9 @@ const updateLayout = (scene) => {
 
         scene.difficultyButtons.forEach((btn, index) => {
             btn.setScale(scale);
+
+            btn._baseScaleX = scale;
+            btn._baseScaleY = scale;
             btn.setPosition(width / 2, startY + index * stepY);
         });
     }

@@ -26,25 +26,28 @@ const createSudokuGrid = (scene) => {
             const x = col * baseCellSize;
             const y = row * baseCellSize;
 
-            // ✅ Невидимый прямоугольник-клетка для клика и подсветки
             const cell = scene.add.rectangle(
                 x + baseCellSize / 2,
                 y + baseCellSize / 2,
                 baseCellSize,
                 baseCellSize,
                 0x000000,
-                0 // полностью прозрачный
+                0
             );
 
             cell.setInteractive({ useHandCursor: true });
             cell.on('pointerup', () => {
+
+                if (scene.initialCells && scene.initialCells[row][col]) {
+                    return;
+                }
+
                 selectCell(scene, row, col);
             });
 
             scene.cells[row][col] = cell;
             scene.gridContainer.add(cell);
 
-            // ✅ Стартовые цифры
             if (scene.board[row][col] !== 0) {
                 const num = scene.board[row][col];
                 const isInitial = scene.initialCells[row][col];

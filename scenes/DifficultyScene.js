@@ -37,7 +37,7 @@ export default class DifficultyScene extends Phaser.Scene {
         
         difficulties.forEach(item => {
             const btn = createDifficultyButton(this,  item.label, item.color, item.hoverColor, () => {
-                this.scene.start('GameScene', {DifficultyScene: item.key});
+                this.scene.start('GameScene', {difficulty: item.key});
             });
             this.difficultyButtons.push(btn);
         })
