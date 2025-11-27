@@ -1,10 +1,19 @@
 ﻿import selectCell from "./selectCell.js";
+import configFont from "../config/configFont.js";
+import configSudoku from "../config/configSudoku.js";
 
 const createSudokuGrid = (scene) => {
+
     scene.gridContainer = scene.add.container(0, 0);
 
-    // Базовый размер клетки (логический, без учёта масштаба)
-    const cellSize = scene.baseCellSize || 50;
+    const gridBg = scene.add.image(0, 0, 'sudokuGrid').setOrigin(0);
+    scene.gridContainer.add(gridBg);
+    scene.gridBackground = gridBg;
+
+    const baseCellSize = gridBg.width / 9;
+    scene.baseCellSize = baseCellSize;
+
+    configSudoku.baseCellSize = baseCellSize;
 
     scene.cells = [];
     scene.texts = [];
@@ -14,16 +23,20 @@ const createSudokuGrid = (scene) => {
         scene.texts[row] = [];
 
         for (let col = 0; col < 9; col++) {
-            const x = col * cellSize;
-            const y = row * cellSize;
+            const x = col * baseCellSize;
+            const y = row * baseCellSize;
 
-            // ✅ КЛЕТКА — ЭТО СПРАЙТ
-            const cell = scene.add.sprite(x, y, 'sudokuCell')
-                .setOrigin(0)                         // левый верхний угол
-                .setDisplaySize(cellSize, cellSize);  // подгоняем под размер логической клетки
+            // ✅ Невидимый прямоугольник-клетка для клика и подсветки
+            const cell = scene.add.rectangle(
+                x + baseCellSize / 2,
+                y + baseCellSize / 2,
+                baseCellSize,
+                baseCellSize,
+                0x000000,
+                0 // полностью прозрачный
+            );
 
             cell.setInteractive({ useHandCursor: true });
-
             cell.on('pointerup', () => {
                 selectCell(scene, row, col);
             });
@@ -31,19 +44,19 @@ const createSudokuGrid = (scene) => {
             scene.cells[row][col] = cell;
             scene.gridContainer.add(cell);
 
-            // ✅ ПЕРВОНАЧАЛЬНЫЕ ЦИФРЫ
+            // ✅ Стартовые цифры
             if (scene.board[row][col] !== 0) {
                 const num = scene.board[row][col];
                 const isInitial = scene.initialCells[row][col];
 
                 const text = scene.add.text(
-                    x + cellSize / 2,
-                    y + cellSize / 2,
+                    x + baseCellSize / 2,
+                    y + baseCellSize / 2,
                     num.toString(),
                     {
-                        fontSize: '24px',
+                        fontSize: configFont.cellFontSize,
                         color: isInitial ? '#2c3e50' : '#3498db',
-                        fontFamily: 'Arial',
+                        fontFamily: configFont.cellFontFamily,
                         fontStyle: isInitial ? 'bold' : 'normal'
                     }
                 ).setOrigin(0.5);
@@ -53,7 +66,6 @@ const createSudokuGrid = (scene) => {
             }
         }
     }
-
-}
+};
 
 export default createSudokuGrid;

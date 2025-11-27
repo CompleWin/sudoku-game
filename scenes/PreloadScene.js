@@ -32,7 +32,7 @@ export default class PreloadScene extends Phaser.Scene {
         this.load.image('playButton', '../assets/play-button.png');
         this.load.image('multiplayerButton', '../assets/multiplayer-button.png');
 
-        this.load.image('sudokuCell', '../assets/cell-test.png');
+        this.load.image('sudokuGrid', '../assets/sudokuGrid.png');
     }
     
     create() {

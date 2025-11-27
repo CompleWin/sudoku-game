@@ -5,6 +5,7 @@ import updateLayout from "../tools/layout/updateLayout.js";
 import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
 import configSudoku from "../tools/config/configSudoku.js";
 import createBackButton from "../tools/create/createBackButton.js";
+import configFont from "../tools/config/configFont.js";
 
 
 export default class DifficultyScene extends Phaser.Scene {
@@ -21,7 +22,7 @@ export default class DifficultyScene extends Phaser.Scene {
         
         // Заглушка НАДО БУДЕТ ИСПРАВИТЬ
         this.difficultyTitleText = this.add.text(0, 0, "Выберите сложность", {
-            fontFamily: 'Arial',
+            fontFamily: configFont.buttonsFontFamily,
             fontSize: getResponsiveFontSize(this, 48) + 'px',
             color: '#ffffff'
         }).setOrigin(0.5, 0);

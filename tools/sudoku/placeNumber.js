@@ -1,5 +1,6 @@
-﻿import checkWin from "./checkWin.js";
-import configSudoku from "../config/configSudoku.js";
+﻿import configSudoku from "../config/configSudoku.js";
+
+import checkWin from "./checkWin.js";
 
 const placeNumber = (scene, num) => {
 
@@ -16,7 +17,7 @@ const placeNumber = (scene, num) => {
     // Обновляем доску
     scene.board[row][col] = num;
 
-    // Создаем новый текст
+    // Создаем новый текст, если число не 0
     if (num !== 0) {
         const cellSize = configSudoku.baseCellSize;
 
@@ -28,7 +29,7 @@ const placeNumber = (scene, num) => {
         const text = scene.add.text(x, y, num.toString(), {
             fontSize: '24px',
             color: isCorrect ? '#3498db' : '#e74c3c',
-            fontFamily: 'Arial'
+            fontFamily: 'Joystix Monospace'
         }).setOrigin(0.5);
 
         scene.texts[row][col] = text;
@@ -37,6 +38,6 @@ const placeNumber = (scene, num) => {
 
     // Проверяем победу
     checkWin(scene);
-}
+};
 
 export default placeNumber;

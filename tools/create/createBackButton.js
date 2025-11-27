@@ -1,10 +1,11 @@
 ﻿import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
+import configFont from "../config/configFont.js";
 
 const createBackButton = (scene) => {
     scene.backButton = scene.add.text(20, 20, '← Назад', {
         fontSize: getResponsiveFontSize(scene, 20) + 'px',
         color: '#ffffff',
-        fontFamily: 'Arial'
+        fontFamily: configFont.buttonsFontFamily
     })
         .setOrigin(0)
         .setInteractive({ useHandCursor: true });

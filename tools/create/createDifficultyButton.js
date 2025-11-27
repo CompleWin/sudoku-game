@@ -1,4 +1,5 @@
 ﻿import configDifficultyButton from "../config/configDifficultyButton.js";
+import configFont from "../config/configFont.js";
 
 const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     const container = scene.add.container(0, 0);
@@ -7,7 +8,7 @@ const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     const height = configDifficultyButton.height;
 
     const text = scene.add.text(0, 0, label, {
-        fontFamily: 'Arial',
+        fontFamily: configFont.buttonsFontFamily,
         fontSize: '32px',
         color: color
     }).setOrigin(0.5);
@@ -22,7 +23,7 @@ const createDifficultyButton = (scene, label, color, hoverColor, onClick) => {
     });
 
     container.on('pointerout', () => {
-        container.setScale(1.0);
+        container.setScale(1);
         text.setColor(color);
     });
 

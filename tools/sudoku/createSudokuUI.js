@@ -2,6 +2,7 @@
 import createBackButton from "../create/createBackButton.js";
 import createNumberButtons from "../create/createNumberButtons.js";
 import createClearButton from "../create/createClearButton.js";
+import configFont from "../config/configFont.js";
 
 const createSudokuUI = (scene) => {
     const {width, height} = scene.scale;
@@ -15,7 +16,7 @@ const createSudokuUI = (scene) => {
     scene.titleText = scene.add.text(width / 2, 20, `Судоку - ${difficultyText[scene.difficulty]}`, {
         fontSize: getResponsiveFontSize(scene, 32) + 'px',
         color: '#ffffff',
-        fontFamily: 'Arial'
+        fontFamily: configFont.buttonsFontFamily
     }).setOrigin(0.5, 0)
 
     createBackButton(scene);

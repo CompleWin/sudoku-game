@@ -51,24 +51,28 @@ const updateLayout = (scene) => {
         });
     }
 
-    if (scene.gridContainer) {
+    if (scene.gridContainer && scene.gridBackground) {
         const scale = getResponsiveScale(scene, 1);
-        const baseCellSize = configSudoku.baseCellSize;
 
-        const gridWidth = baseCellSize * 9 * scale;
-        const gridHeight = baseCellSize * 9 * scale;
+        const baseGridWidth = scene.gridBackground.width;
+        const baseGridHeight = scene.gridBackground.height;
+
+        const gridWidth = baseGridWidth * scale;
+        const gridHeight = baseGridHeight * scale;
 
         scene.gridContainer.setScale(scale);
         scene.gridContainer.setPosition(
             width / 2 - gridWidth / 2,
-            height / 2 - gridHeight / 2 + 30
+            height / 2 - gridHeight / 2
         );
     }
+
+
 
     if (scene.numberButtons) {
         const buttonSpacing = 60 * getResponsiveScale(scene, 1);
         const startX = width / 2 - (buttonSpacing * 4);
-        const y = height - 80;
+        const y = height - 120;
 
         scene.numberButtons.forEach((btn, i) => {
             btn.setPosition(startX + i * buttonSpacing, y);
@@ -77,7 +81,7 @@ const updateLayout = (scene) => {
 
     // Обновляем кнопку очистки
     if (scene.clearButton) {
-        scene.clearButton.setPosition(width / 2, height - 30);
+        scene.clearButton.setPosition(width / 2, height - 40);
     }
 
     if (scene.backButton) {
@@ -85,7 +89,7 @@ const updateLayout = (scene) => {
         scene.backButton.setFontSize(fontSize);
     }
 
-    // Обновляем кнопки сложности
+
     if (scene.difficultyButtons && scene.difficultyButtons.length > 0) {
         const scale = getResponsiveScale(scene,1);
         const stepY = 60 * scale;
