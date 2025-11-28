@@ -5,6 +5,7 @@ import createOpponentProgressText from "../create/createOpponentProgressText.js"
 import sendProgress from "./sendProgress.js";
 import showWinMessage from "../sudoku/showWinMessage.js";
 import updateLayout from "../layout/updateLayout.js";
+import createBackButton from "../create/createBackButton.js";
 
 const registerSocketHandlers = (scene) => {
 
@@ -15,6 +16,7 @@ const registerSocketHandlers = (scene) => {
     scene.socket.on('waitingForOpponent', () => {
         if (scene.waitingText) {
             scene.waitingText.setText(`Ожиадание второго игрока...`);
+            createBackButton(scene);
         }
     });
 

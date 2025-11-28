@@ -49,6 +49,7 @@ export default class GameScene extends Phaser.Scene {
 
         registerSocketHandlers(this);
 
+
         this.socket.emit('findGame', {
             difficulty: this.difficulty,
         });
