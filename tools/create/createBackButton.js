@@ -13,12 +13,16 @@ const createBackButton = (scene) => {
     scene.backButton.on('pointerover', () => scene.backButton.setColor('#3498db'));
     scene.backButton.on('pointerout', () => scene.backButton.setColor('#ffffff'));
     scene.backButton.on('pointerup', () => {
-        if (scene.scene.key === 'GameScene' && window.confirm("Вы уверены?")) {
+        if (scene.scene.key === 'GameScene') {
+            if (window.confirm("Вы уверены?"))
+            {
+                scene.scene.start('MenuScene');
+            }
+        } else {
             scene.scene.start('MenuScene');
         }
-        else {
-            scene.scene.start('MenuScene');
-        }
+
+
     });
 }
 
