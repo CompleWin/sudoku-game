@@ -2,6 +2,8 @@
 import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
 import getResponsiveScale from "../responvisve/getResponsiveScale.js";
 import configSudoku from "../config/configSudoku.js";
+import sudokuGridLayout from "./sudokuGridLayout.js";
+import numberButtonsLayout from "./numberButtonsLayout.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -52,34 +54,13 @@ const updateLayout = (scene) => {
     }
 
     if (scene.gridContainer && scene.gridBackground) {
-        const scale = getResponsiveScale(scene, 1);
-
-        const baseGridWidth = scene.gridBackground.width;
-        const baseGridHeight = scene.gridBackground.height;
-
-        const gridWidth = baseGridWidth * scale;
-        const gridHeight = baseGridHeight * scale;
-
-        scene.gridContainer.setScale(scale);
-        scene.gridContainer.setPosition(
-            width / 2 - gridWidth / 2,
-            height / 2 - gridHeight / 2
-        );
+        sudokuGridLayout(scene);
     }
-
-
 
     if (scene.numberButtons) {
-        const buttonSpacing = 60 * getResponsiveScale(scene, 1);
-        const startX = width / 2 - (buttonSpacing * 4);
-        const y = height - 120;
-
-        scene.numberButtons.forEach((btn, i) => {
-            btn.setPosition(startX + i * buttonSpacing, y);
-        });
+        numberButtonsLayout(scene);
     }
 
-    // Обновляем кнопку очистки
     if (scene.clearButton) {
         scene.clearButton.setPosition(width / 2, height - 40);
     }

@@ -21,8 +21,6 @@ const createBackButton = (scene) => {
         } else {
             scene.scene.start('MenuScene');
         }
-
-
     });
 }
 

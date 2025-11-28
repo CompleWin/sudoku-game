@@ -19,9 +19,7 @@ const createSudokuUI = (scene) => {
         fontFamily: configFont.buttonsFontFamily
     }).setOrigin(0.5, 0)
 
-    if (!scene.backButton) {
-        createBackButton(scene);
-    }
+    createBackButton(scene);
 
     createNumberButtons(scene);
     createClearButton(scene);
