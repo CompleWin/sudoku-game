@@ -1,6 +1,8 @@
 {
   "dependencies": {
+    "express": "^5.1.0",
     "gitignore": "^0.7.0",
-    "phaser": "^3.90.0"
+    "phaser": "^3.90.0",
+    "socket.io": "^4.8.1"
   }
 }

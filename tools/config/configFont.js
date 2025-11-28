@@ -1,5 +1,7 @@
 ﻿
 const configFont = {
+    defaultFontFamily: "Joystix Monospace",
+
     cellFontFamily: "Joystix Monospace",
     cellFontSize: 24,
 
@@ -7,6 +9,10 @@ const configFont = {
     buttonsFontSize: 24,
 
     clearButtonFontSize: 20,
+
+    opponentProgressFontSize: 18,
+    opponentProgressFontColor: '#ffffff',
+
 
 };
 

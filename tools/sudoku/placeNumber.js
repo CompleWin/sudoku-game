@@ -1,6 +1,7 @@
 ﻿import configSudoku from "../config/configSudoku.js";
 
 import checkWin from "./checkWin.js";
+import sendProgress from "../server/sendProgress.js";
 
 const placeNumber = (scene, num) => {
 
@@ -36,7 +37,10 @@ const placeNumber = (scene, num) => {
         scene.gridContainer.add(text);
     }
 
-    // Проверяем победу
+    if (sendProgress) {
+        sendProgress(scene)
+    }
+
     checkWin(scene);
 };
 
