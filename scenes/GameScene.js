@@ -8,6 +8,8 @@ import removeNumbers from "../tools/sudoku/removeNumbers.js";
 import solveSudoku from "../tools/sudoku/solveSudoku.js";
 import registerMultiplayerSocketHandlers from "../tools/server/registerMultiplayerSocketHandlers.js";
 import createSudokuUI from "../tools/sudoku/createSudokuUI.js";
+import startTimer from "../tools/timer/startTimer.js";
+import stopTimer from "../tools/timer/stopTimer.js";
 
 
 export default class GameScene extends Phaser.Scene {
@@ -32,7 +34,13 @@ export default class GameScene extends Phaser.Scene {
         this.hasSentSolved = false;
 
         this.waitingText = null;
+        this.waitingDotsEvent = null;
+
         this.opponentProgressText = null;
+
+        this.timerText = null;
+        this.elapsedTime = 0;
+        this.timerEvent = null;
     }
 
     init(data) {
@@ -54,6 +62,7 @@ export default class GameScene extends Phaser.Scene {
         } else {
             this.createSudoku();
             createSudokuUI(this);
+            startTimer(this);
         }
 
         autoLayoutEvent(this, updateLayout);
@@ -63,6 +72,14 @@ export default class GameScene extends Phaser.Scene {
                 this.socket.disconnect();
                 this.socket = null;
             }
+
+            stopTimer(this);
+
+            if (this.waitingDotsEvent) {
+                this.waitingDotsEvent.remove(false);
+                this.waitingDotsEvent = null;
+            }
+
         });
 
     }

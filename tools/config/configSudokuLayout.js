@@ -13,5 +13,7 @@ const configSudokuLayout = {
     numbersBaseScale: 1,
     numberSpacing: 60,
     numberOffsetBottom: 40,
+
+    timerFontSize: 16,
 }
 export default configSudokuLayout;

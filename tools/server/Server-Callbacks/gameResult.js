@@ -2,6 +2,7 @@
 import showLoseMessage from "../../sudoku/showLoseMessage.js";
 import createCenterText from "../../create/createCenterText.js";
 import {Language} from "../../../language.js";
+import stopTimer from "../../timer/stopTimer.js";
 
 const gameResult = (scene) => {
     scene.socket.on('gameResult', ({result}) => {
@@ -11,6 +12,7 @@ const gameResult = (scene) => {
             showLoseMessage(scene);
         } else {
             createCenterText(scene, Language.data["game"]["game_over"], '#ffffff', 48, 'bold');
+            stopTimer(scene);
         }
     });
 }

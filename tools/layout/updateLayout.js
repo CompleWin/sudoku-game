@@ -1,10 +1,10 @@
 ﻿import configSpriteScale from "../config/configSpriteScale.js";
 import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
 import getResponsiveScale from "../responvisve/getResponsiveScale.js";
-import configSudoku from "../config/configSudoku.js";
-import sudokuGridLayout from "./sudokuGridLayout.js";
-import numberButtonsLayout from "./numberButtonsLayout.js";
+import sudokuGridLayout from "./layouts/sudokuGridLayout.js";
+import numberButtonsLayout from "./layouts/numberButtonsLayout.js";
 import configDifficultyButton from "../config/configDifficultyButton.js";
+import timerLayout from "./layouts/timerLayout.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -89,6 +89,10 @@ const updateLayout = (scene) => {
         const fontSize = getResponsiveFontSize(scene, configDifficultyButton.titleFontSize);
         scene.difficultyTitleText.setFontSize(fontSize);
         scene.difficultyTitleText.setPosition(width / 2, height * titleOffset);
+    }
+
+    if (scene.timerText) {
+        timerLayout(scene);
     }
 }
 

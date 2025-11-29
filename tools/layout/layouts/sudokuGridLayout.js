@@ -1,5 +1,5 @@
-﻿import getResponsiveScale from "../responvisve/getResponsiveScale.js";
-import configSudokuLayout from "../config/configSudokuLayout.js";
+﻿import getResponsiveScale from "../../responvisve/getResponsiveScale.js";
+import configSudokuLayout from "../../config/configSudokuLayout.js";
 
 const sudokuGridLayout = (scene) => {
     const { width, height } = scene.scale;

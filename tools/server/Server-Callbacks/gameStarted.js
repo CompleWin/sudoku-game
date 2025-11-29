@@ -3,6 +3,7 @@ import createSudokuUI from "../../sudoku/createSudokuUI.js";
 import createOpponentProgressText from "../../create/createOpponentProgressText.js";
 import sendProgress from "../sendProgress.js";
 import updateLayout from "../../layout/updateLayout.js";
+import startTimer from "../../timer/startTimer.js";
 
 const gameStarted = (scene) => {
 
@@ -22,11 +23,14 @@ const gameStarted = (scene) => {
             scene.waitingDotsEvent = null;
         }
 
+
         createSudokuGrid(scene);
         createSudokuUI(scene);
         createOpponentProgressText(scene);
         sendProgress(scene);
         updateLayout(scene);
+
+        startTimer(scene);
     });
 }
 

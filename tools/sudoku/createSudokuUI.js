@@ -5,6 +5,7 @@ import createClearButton from "../create/createClearButton.js";
 import configFont from "../config/configFont.js";
 import {Language} from "../../language.js";
 import configSudokuLayout from "../config/configSudokuLayout.js";
+import createTimerText from "../timer/createTimerText.js";
 
 const createSudokuUI = (scene) => {
     const {width} = scene.scale;
@@ -14,6 +15,8 @@ const createSudokuUI = (scene) => {
         color: '#ffffff',
         fontFamily: configSudokuLayout.numbersFontFamily
     }).setOrigin(0.5, 0)
+
+    createTimerText(scene);
 
     createBackButton(scene);
     createNumberButtons(scene);
