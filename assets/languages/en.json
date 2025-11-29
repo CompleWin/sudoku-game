@@ -7,7 +7,7 @@
     "stats": "Stats",
     "back_button": "<- Back",
     "confirm": "Are you sure?",
-    "waiting_text": "waiting for player..."
+    "waiting_text": "waiting for player"
   },
   "difficulty": {
     "title": "Choose difficulty",

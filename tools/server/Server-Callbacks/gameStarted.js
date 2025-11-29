@@ -17,6 +17,11 @@ const gameStarted = (scene) => {
             scene.waitingText = null;
         }
 
+        if (scene.waitingDotsEvent) {
+            scene.waitingDotsEvent.remove(false);
+            scene.waitingDotsEvent = null;
+        }
+
         createSudokuGrid(scene);
         createSudokuUI(scene);
         createOpponentProgressText(scene);

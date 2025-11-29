@@ -7,6 +7,7 @@ const configFont = {
 
     buttonsFontFamily: 'Joystix Monospace',
     buttonsFontSize: 24,
+    buttonsFontColor: '#ffffff',
 
     clearButtonFontSize: 20,
 
