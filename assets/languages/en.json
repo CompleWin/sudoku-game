@@ -4,6 +4,14 @@
     "single_player": "Singleplayer",
     "multiplayer": "Multiplayer",
     "settings": "Settings",
-    "stats": "Stats"
+    "stats": "Stats",
+    "back_button": "<- Back",
+    "confirm": "Are you sure?"
+  },
+  "difficulty": {
+    "title": "Choose difficulty",
+    "easy": "easy",
+    "medium": "medium",
+    "hard": "hard"
   }
 }

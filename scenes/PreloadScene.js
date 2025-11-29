@@ -1,4 +1,4 @@
-﻿import Language from '../language.js';
+﻿import {getLanguage, Language} from "../language.js";
 
 export default class PreloadScene extends Phaser.Scene {
     constructor() {
@@ -6,7 +6,7 @@ export default class PreloadScene extends Phaser.Scene {
     }
     
     preload() {
-        const lang = localStorage.getItem('lang') || 'ru';
+        const lang = getLanguage();
         
         this.load.json("lang", `assets/languages/${lang}.json`);
         this.load.image('bg_menu', '../assets/bg_solid.png');

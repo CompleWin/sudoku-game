@@ -8,6 +8,7 @@ import removeNumbers from "../tools/sudoku/removeNumbers.js";
 import solveSudoku from "../tools/sudoku/solveSudoku.js";
 import createWaitingText from "../tools/create/createWaitingText.js";
 import registerSocketHandlers from "../tools/server/registerSocketHandlers.js";
+import createSudokuUI from "../tools/sudoku/createSudokuUI.js";
 
 
 export default class GameScene extends Phaser.Scene {
@@ -37,22 +38,30 @@ export default class GameScene extends Phaser.Scene {
 
     init(data) {
         this.difficulty = (data && data.difficulty) || 'easy';
-        this.isMultiplayer = !!(data && data.isMultiplayer);
+        this.isMultiplayer = data.isMultiplayer;
     }
 
     create() {
 
+        console.log(this.isMultiplayer);
+
         createBackgroundImage(this);
-        createWaitingText(this);
 
-        this.socket = io();
+        if (this.isMultiplayer) {
+            createWaitingText(this);
 
-        registerSocketHandlers(this);
+            this.socket = io();
+
+            registerSocketHandlers(this);
 
 
-        this.socket.emit('findGame', {
-            difficulty: this.difficulty,
-        });
+            this.socket.emit('findGame', {
+                difficulty: this.difficulty,
+            });
+        } else {
+            this.createSudoku();
+            createSudokuUI(this);
+        }
 
         autoLayoutEvent(this, updateLayout);
 

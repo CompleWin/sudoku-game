@@ -3,6 +3,7 @@ import createBackButton from "../create/createBackButton.js";
 import createNumberButtons from "../create/createNumberButtons.js";
 import createClearButton from "../create/createClearButton.js";
 import configFont from "../config/configFont.js";
+import {Language} from "../../language.js";
 
 const createSudokuUI = (scene) => {
     const {width, height} = scene.scale;
@@ -13,7 +14,7 @@ const createSudokuUI = (scene) => {
         hard: "Сложный"
     };
 
-    scene.titleText = scene.add.text(width / 2, 20, `Судоку - ${difficultyText[scene.difficulty]}`, {
+    scene.titleText = scene.add.text(width / 2, 20, `${Language.data["menu"]["title"]} - ${Language.data["difficulty"][scene.difficulty]}`, {
         fontSize: getResponsiveFontSize(scene, 32) + 'px',
         color: '#ffffff',
         fontFamily: configFont.buttonsFontFamily

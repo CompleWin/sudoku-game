@@ -1,4 +1,4 @@
-﻿export default class Language {
+﻿export class Language {
     static data = {};
     
     static t(path) {
@@ -10,4 +10,24 @@
         } 
         return obj;
     }
+}
+
+export function getLanguage() {
+    const language = localStorage.getItem("lang");
+
+    if (!language) {
+        localStorage.setItem('lang', 'ru');
+        return 'ru';
+    }
+    else {
+        return language.toLowerCase();
+    }
+}
+
+export function setLanguage(newLanguage) {
+
+    const language = localStorage.getItem("lang");
+
+    localStorage.setItem('lang', newLanguage.toLowerCase());
+    location.reload();
 }
