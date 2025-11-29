@@ -28,7 +28,7 @@ export default class DifficultyScene extends Phaser.Scene {
 
         this.difficultyTitleText = this.add.text(0, 0, Language.data['difficulty']["title"], {
             fontFamily: configFont.buttonsFontFamily,
-            fontSize: getResponsiveFontSize(this, 48) + 'px',
+            fontSize: getResponsiveFontSize(this, configDifficultyButton.titleFontSize) + 'px',
             color: '#ffffff'
         }).setOrigin(0.5, 0);
 

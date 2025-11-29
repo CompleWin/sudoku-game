@@ -1,5 +1,7 @@
 ﻿import placeNumber from "../sudoku/placeNumber.js";
 import configFont from "../config/configFont.js";
+import configSudokuLayout from "../config/configSudokuLayout.js";
+import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
 
 const createNumberButton = (scene) => {
 
@@ -7,9 +9,9 @@ const createNumberButton = (scene) => {
 
     for (let i = 1; i <= 9; i++) {
         const btn = scene.add.text(0, 0, i.toString(), {
-            fontSize: configFont.buttonsFontSize,
+            fontSize: getResponsiveFontSize(scene, configSudokuLayout.numbersFontSize),
             color: '#000000',
-            fontFamily: configFont.buttonsFontFamily,
+            fontFamily: configSudokuLayout.numbersFontFamily,
             backgroundColor: '#e6ecfd',
             padding: {x: 12, y: 8}
         }).setOrigin(0.5)

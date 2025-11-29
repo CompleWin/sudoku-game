@@ -1,6 +1,7 @@
 ﻿import selectCell from "./selectCell.js";
 import configFont from "../config/configFont.js";
 import configSudoku from "../config/configSudoku.js";
+import configSudokuLayout from "../config/configSudokuLayout.js";
 
 const createSudokuGrid = (scene) => {
 
@@ -57,9 +58,9 @@ const createSudokuGrid = (scene) => {
                     y + baseCellSize / 2,
                     num.toString(),
                     {
-                        fontSize: configFont.cellFontSize,
+                        fontSize: configSudokuLayout.cellFontSize,
                         color: isInitial ? '#2c3e50' : '#3498db',
-                        fontFamily: configFont.cellFontFamily,
+                        fontFamily: configSudokuLayout.cellFontFamily,
                         fontStyle: isInitial ? 'bold' : 'normal'
                     }
                 ).setOrigin(0.5);

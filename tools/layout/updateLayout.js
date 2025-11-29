@@ -4,6 +4,7 @@ import getResponsiveScale from "../responvisve/getResponsiveScale.js";
 import configSudoku from "../config/configSudoku.js";
 import sudokuGridLayout from "./sudokuGridLayout.js";
 import numberButtonsLayout from "./numberButtonsLayout.js";
+import configDifficultyButton from "../config/configDifficultyButton.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -39,11 +40,10 @@ const updateLayout = (scene) => {
     
     if (scene.menuButtons && scene.menuButtons.length > 0) {
         const totalButtons = scene.menuButtons.length;
-        const stepY = getResponsiveFontSize(scene, configSpriteScale.baseStepY); // Относительное расстояние
+        const stepY = getResponsiveFontSize(scene, configSpriteScale.baseStepY);
         const totalHeight = (totalButtons - 1) * stepY;
-        let startY = height / 2 - totalHeight / 2;
+        let startY = height / 2 - totalHeight / 2 + 30;
 
-        // Обновляем масштаб и позицию каждой кнопки
         scene.menuButtons.forEach((btn, index) => {
             const baseScale = configSpriteScale.baseScale;
             const scale = getResponsiveScale(scene, 1);
@@ -73,7 +73,7 @@ const updateLayout = (scene) => {
 
     if (scene.difficultyButtons && scene.difficultyButtons.length > 0) {
         const scale = getResponsiveScale(scene,1);
-        const stepY = 60 * scale;
+        const stepY = configDifficultyButton.stepYOffset * scale;
         const startY = height / 2 - stepY;
 
         scene.difficultyButtons.forEach((btn, index) => {
@@ -86,7 +86,7 @@ const updateLayout = (scene) => {
     }
 
     if (scene.difficultyTitleText) {
-        const fontSize = getResponsiveFontSize(scene, 48);
+        const fontSize = getResponsiveFontSize(scene, configDifficultyButton.titleFontSize);
         scene.difficultyTitleText.setFontSize(fontSize);
         scene.difficultyTitleText.setPosition(width / 2, height * titleOffset);
     }

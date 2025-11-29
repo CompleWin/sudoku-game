@@ -1,14 +1,15 @@
 ﻿import getResponsiveScale from "../responvisve/getResponsiveScale.js";
+import configSudokuLayout from "../config/configSudokuLayout.js";
 
 const numberButtonsLayout = (scene) => {
     const { width, height } = scene.scale;
 
-    const scale = getResponsiveScale(scene, 1);
+    const scale = getResponsiveScale(scene, configSudokuLayout.numbersBaseScale);
 
-    const buttonSpacing = 60 * scale;
+    const buttonSpacing = configSudokuLayout.numberSpacing * scale;
     const startX = width / 2 - (buttonSpacing * 4);
 
-    const offsetBottom = 60 * scale;
+    const offsetBottom = configSudokuLayout.numberOffsetBottom * scale;
     const baseY = scene.gridBottomY + offsetBottom;
 
 

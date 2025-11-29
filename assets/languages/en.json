@@ -6,12 +6,19 @@
     "settings": "Settings",
     "stats": "Stats",
     "back_button": "<- Back",
-    "confirm": "Are you sure?"
+    "confirm": "Are you sure?",
+    "waiting_text": "waiting for player..."
   },
   "difficulty": {
     "title": "Choose difficulty",
     "easy": "easy",
     "medium": "medium",
     "hard": "hard"
+  },
+  "game": {
+    "victory": "Victory!",
+    "lose": "Lose",
+    "lost_connection": "Connection is LOST",
+    "game_over": "Game Over!"
   }
 }

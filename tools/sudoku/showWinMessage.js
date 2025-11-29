@@ -1,22 +1,11 @@
-﻿import createBackgroundImage from "../create/createBackgroundImage.js";
-import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
-import configFont from "../config/configFont.js";
+﻿import createCenterText from "../create/createCenterText.js";
+import {Language} from "../../language.js";
 
-const showWinMessage = (scene, message = 'Победа!', color = '#2ecc71') => {
-    const { width, height } = scene.scale;
+const showWinMessage = (scene) => {
 
-    createBackgroundImage(scene);
-
-    scene.add.text(width / 2, height / 2, message, {
-        fontSize: getResponsiveFontSize(scene,48) + 'px',
-        color: color,
-        fontFamily: configFont.defaultFontFamily,
-        fontStyle: 'bold'
-    }).setOrigin(0.5);
-
-    scene.time.delayedCall(2000, () => {
-        scene.scene.start('MenuScene');
-    });
+    createCenterText(scene, Language.data["game"]["victory"], '#2ecc71', 48, 'bold');
+    scene.backButton.removeListener('pointerup');
+    scene.backButton.on('pointerup', () => scene.scene.start('MenuScene'));
 }
 
 export default showWinMessage;
