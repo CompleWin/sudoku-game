@@ -19,6 +19,7 @@
     "victory": "Victory!",
     "lose": "Lose",
     "lost_connection": "Connection is LOST",
-    "game_over": "Game Over!"
+    "game_over": "Game Over!",
+    "time": "Game time: "
   }
 }

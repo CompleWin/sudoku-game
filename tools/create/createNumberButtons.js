@@ -2,6 +2,8 @@
 import configFont from "../config/configFont.js";
 import configSudokuLayout from "../config/configSudokuLayout.js";
 import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
+import sendProgress from "../server/sendProgress.js";
+import checkSolvedAndSend from "../sudoku/checkSolvedAndSend.js";
 
 const createNumberButton = (scene) => {
 
@@ -19,7 +21,9 @@ const createNumberButton = (scene) => {
 
         btn.on('pointerover', () => btn.setBackgroundColor('#7e95fd'));
         btn.on('pointerout', () => btn.setBackgroundColor('#e4eafb'));
-        btn.on('pointerup', () => placeNumber(scene, i));
+        btn.on('pointerup', () => {
+            placeNumber(scene, i);
+        });
 
         scene.numberButtons.push(btn);
     }

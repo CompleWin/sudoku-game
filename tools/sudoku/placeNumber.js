@@ -38,9 +38,8 @@ const placeNumber = (scene, num) => {
         scene.gridContainer.add(text);
     }
 
-    if (sendProgress) {
-        sendProgress(scene)
-    }
+    sendProgress(scene);
+
 
     checkWin(scene);
 };

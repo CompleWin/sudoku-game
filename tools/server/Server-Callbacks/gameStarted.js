@@ -12,6 +12,7 @@ const gameStarted = (scene) => {
         scene.board = board;
         scene.solution = solution;
         scene.initialCells = board.map(row => row.map(v => v !== 0));
+        scene.hasSentSolved = false;
 
         if (scene.waitingText) {
             scene.waitingText.destroy();

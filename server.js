@@ -31,7 +31,6 @@ io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);
 
     socket.on('findGame', ({difficulty}) => {
-        difficulty = difficulty || 'easy';
 
         if (!waitingPlayers[difficulty]) {
             waitingPlayers[difficulty] = [];

@@ -16,5 +16,6 @@ const configSudokuLayout = {
 
     timerFontSize: 12,
     timerFontColor: '#cccccc',
+    timerCenterOffset: 80,
 }
 export default configSudokuLayout;

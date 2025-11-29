@@ -1,13 +1,13 @@
 ﻿import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
 import configSudokuLayout from "../config/configSudokuLayout.js";
 
-const createTimerText = (scene) => {
+const createTimerText = (scene, time = "00:00", height = 0) => {
     const { width } = scene.scale;
 
     scene.timerText = scene.add.text(
         width / 2,
-        0,
-        "00:00",
+        height,
+        time,
         {
             fontSize: getResponsiveFontSize(scene, configSudokuLayout.timerFontSize) + 'px',
             color: configSudokuLayout.timerFontColor,

@@ -1,13 +1,11 @@
-﻿
+﻿import configSudoku from "../config/configSudoku.js";
+
 const removeNumbers = (board, difficulty) => {
 
-    const cellsToRemove = {
-        easy: 30,
-        medium: 45,
-        hard: 55
-    };
+    const cellsToRemove = configSudoku.cellsToRemove;
 
     const count = cellsToRemove[difficulty];
+    console.log(count);
     let removed = 0;
 
     while (removed < count) {
