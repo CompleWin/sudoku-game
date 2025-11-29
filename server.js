@@ -4,9 +4,16 @@ import http from 'http';
 import {Server} from 'socket.io';
 import path from 'path';
 import {fileURLToPath} from 'url';
+import loadUsers from "./tools/users/loadUsers.js";
+import createUserId from "./tools/users/createUserId.js";
+import saveUsers from "./tools/users/saveUsers.js";
+import parseCookies from "./tools/users/parseCookies.js";
+import applyResultForSocket from "./tools/users/applyResultForSocket.js";
+
 
 
 const PORT = 80;
+const COOKIES_AGE = 1000 * 60 * 60 * 24 * 365;
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -15,7 +22,59 @@ const app = express();
 const server = http.createServer(app);
 const io = new Server(server);
 
+const USERS_FILE = path.join(__dirname, 'users.json');
+let users = {};
+
+loadUsers(USERS_FILE, users);
+
+app.use(express.json());
 app.use(express.static(__dirname));
+
+app.post('/api/register', (req, res) => {
+    const { nickname } = req.body || {};
+
+    if (!nickname || typeof nickname !== 'string') {
+        return res.status(400).json({ error: 'Nickname is required' });
+    }
+
+    const cleanName = nickname.trim();
+    if (!cleanName) {
+        return res.status(400).json({ error: 'Nickname is empty' });
+    }
+
+    const shortName = cleanName.slice(0, 30);
+    const userId = createUserId();
+
+    users[userId] = {
+        id: userId,
+        nickname: shortName,
+        wins: 0,
+        losses: 0,
+        games: 0,
+        createdAt: new Date().toISOString()
+    };
+
+    saveUsers(USERS_FILE, users);
+
+    res.cookie('userId', userId, {
+        maxAge: COOKIES_AGE,
+        httpOnly: false,
+        sameSite: 'lax'
+    });
+
+    res.json(users[userId]);
+});
+
+app.get('/api/me', (req, res) => {
+    const cookies = parseCookies(req.headers.cookie || '');
+    const userId = cookies.userId;
+
+    if (!userId || !users[userId]) {
+        return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json(users[userId]);
+});
 
 console.log(`Server starting`);
 
@@ -29,6 +88,17 @@ const games = {};
 
 io.on('connection', (socket) => {
     console.log('Client connected:', socket.id);
+
+    const cookies = parseCookies(socket.handshake.headers.cookie || '');
+    const userId = cookies.userId;
+
+    if (userId && users[userId]) {
+        socket.data.userId = userId;
+        socket.data.nickname = users[userId].nickname;
+        console.log(`Socket ${socket.id} authenticated as ${users[userId].nickname} (${userId})`);
+    } else {
+        console.log(`Socket ${socket.id} connected without known userId`);
+    }
 
     socket.on('findGame', ({difficulty}) => {
 
@@ -84,14 +154,16 @@ io.on('connection', (socket) => {
             game.winner = socket.id;
 
             const [p1, p2] = game.players;
+            const winnerSocketId = socket.id;
+            const loserSocketId = p1 === winnerSocketId ? p2 : p1;
 
-            io.to(p1).emit('gameResult', {
-                result: p1 === socket.id ? 'win' : 'lose',
-            });
+            applyResultForSocket(io, winnerSocketId, USERS_FILE, users,'win');
+            applyResultForSocket(io, loserSocketId, USERS_FILE, users, 'lose');
 
-            io.to(p2).emit('gameResult', {
-                result: p2 === socket.id ? 'win' : 'lose',
-            });
+            io.to(winnerSocketId).emit('gameResult', { result: 'win' });
+            io.to(loserSocketId).emit('gameResult', { result: 'lose' });
+
+            delete games[roomId];
 
             console.log(`Game in room ${roomId} finished. Winner: ${socket.id}`);
         }
@@ -109,6 +181,8 @@ io.on('connection', (socket) => {
             if (game.players.includes(socket.id) && !game.winner) {
                 const opponentId = game.players.find(id => id !== socket.id);
                 if (opponentId) {
+                    applyResultForSocket(io, opponentId, USERS_FILE, users,'win');
+                    applyResultForSocket(io, socket.id, USERS_FILE, users, 'lose');
                     io.to(opponentId).emit('gameResult', { result: 'win'} );
                 }
                 delete games[roomId];

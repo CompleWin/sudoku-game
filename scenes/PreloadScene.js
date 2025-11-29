@@ -37,6 +37,14 @@ export default class PreloadScene extends Phaser.Scene {
     
     create() {
         Language.data = this.cache.json.get("lang");
-        this.scene.start('MenuScene');
+
+        const hasUserIdCookie = document.cookie.split(';').some(c => c.trim().startsWith('userId='));
+
+        if (hasUserIdCookie) {
+            this.scene.start('MenuScene');
+        } else {
+            this.scene.start('AuthScene');
+        }
+
     }
 }

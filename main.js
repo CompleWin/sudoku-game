@@ -3,6 +3,7 @@ import PreloadScene from './scenes/PreloadScene.js';
 import DifficultyScene from "./scenes/DifficultyScene.js";
 import GameScene from "./scenes/GameScene.js";
 import './language.js';
+import AuthScene from "./scenes/AuthScene.js";
 
 
 const GAME_WIDTH = 1280;
@@ -29,10 +30,14 @@ const config = {
     parent: 'game-container',
     scene: [
         PreloadScene,
+        AuthScene,
         MenuScene,
         DifficultyScene,
         GameScene,
-    ]
+    ],
+    dom: {
+        createContainer: true,
+    }
 };
 
 const game = new Phaser.Game(config);
