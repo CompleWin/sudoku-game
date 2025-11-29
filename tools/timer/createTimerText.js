@@ -5,15 +5,15 @@ const createTimerText = (scene) => {
     const { width } = scene.scale;
 
     scene.timerText = scene.add.text(
-        width - 20,
-        20,
+        width / 2,
+        0,
         "00:00",
         {
             fontSize: getResponsiveFontSize(scene, configSudokuLayout.timerFontSize) + 'px',
-            color: '#ffffff',
+            color: configSudokuLayout.timerFontColor,
             fontFamily: configSudokuLayout.numbersFontFamily
         }
-    ).setOrigin(1, 0);
+    ).setOrigin(0.5, 1);
 }
 
 export default createTimerText;

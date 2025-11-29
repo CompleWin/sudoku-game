@@ -14,6 +14,7 @@ const configSudokuLayout = {
     numberSpacing: 60,
     numberOffsetBottom: 40,
 
-    timerFontSize: 16,
+    timerFontSize: 12,
+    timerFontColor: '#cccccc',
 }
 export default configSudokuLayout;
