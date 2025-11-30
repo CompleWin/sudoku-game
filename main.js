@@ -4,6 +4,7 @@ import DifficultyScene from "./scenes/DifficultyScene.js";
 import GameScene from "./scenes/GameScene.js";
 import './language.js';
 import AuthScene from "./scenes/AuthScene.js";
+import StatsScene from "./scenes/StatsScene.js";
 
 
 const GAME_WIDTH = 1280;
@@ -34,6 +35,7 @@ const config = {
         MenuScene,
         DifficultyScene,
         GameScene,
+        StatsScene,
     ],
     dom: {
         createContainer: true,

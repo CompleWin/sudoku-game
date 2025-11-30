@@ -36,7 +36,7 @@ const getConfigMenuItems = (scene) => {
             hoverAtlasKey: 'uiButtonsHover',
             hoverKey: `stats_${currentLanguage}_hover.png`,
             onClick: () => {
-                scene.scene.start('')
+                scene.scene.start('StatsScene')
             }
         },
     ];

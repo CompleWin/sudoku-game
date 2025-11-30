@@ -20,6 +20,7 @@ const createNicknameText = (scene) => {
     })
         .then(res => {
             if (!res.ok) {
+                scene.scene.start('AuthScene');
                 throw new Error('Не удалось получить данные пользователя');
             }
             return res.json();
