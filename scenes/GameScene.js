@@ -32,6 +32,7 @@ export default class GameScene extends Phaser.Scene {
 
         this.isMultiplayer = false;
         this.hasSentSolved = false;
+        this.hasSentMistakeLose = false;
 
         this.waitingText = null;
         this.waitingDotsEvent = null;

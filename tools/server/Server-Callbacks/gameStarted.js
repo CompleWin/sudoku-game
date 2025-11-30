@@ -13,6 +13,7 @@ const gameStarted = (scene) => {
         scene.solution = solution;
         scene.initialCells = board.map(row => row.map(v => v !== 0));
         scene.hasSentSolved = false;
+        scene.hasSentMistakeLose = false;
 
         scene.opponentNickname = opponentNickname || 'соперника';
 

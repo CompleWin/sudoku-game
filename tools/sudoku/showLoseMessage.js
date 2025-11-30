@@ -7,6 +7,7 @@ import configSudokuLayout from "../config/configSudokuLayout.js";
 
 const showLoseMessage = (scene) => {
     stopTimer(scene);
+
     createCenterText(scene, Language.data["game"]["lose"], '#e74c3c', 48, 'bold');
     createTimerText(
         scene,

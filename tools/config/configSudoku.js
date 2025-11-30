@@ -8,7 +8,13 @@ const configSudoku = {
         easy: 1,
         medium: 45,
         hard: 55,
-    }
+    },
+
+    mistakesLimits: {
+        easy: 10,
+        medium: 6,
+        hard: 3
+    },
 };
 
 

@@ -10,6 +10,7 @@ import inputLayout from "./layouts/inputLayout.js";
 import confirmButtonLayout from "./layouts/confirmButtonLayout.js";
 import errorTextLayout from "./layouts/errorTextLayout.js";
 import configFont from "../config/configFont.js";
+import configSudokuLayout from "../config/configSudokuLayout.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -119,6 +120,16 @@ const updateLayout = (scene) => {
         const fontSize = getResponsiveFontSize(scene, configFont.nicknameFontSize);
         scene.currentUserText.setFontSize(fontSize);
         scene.currentUserText.setPosition(width - 20, height - 20);
+    }
+
+    if (scene.mistakeText) {
+        const gridY = scene.gridContainer.y;
+        const gridTop = gridY - (scene.gridContainer.displayHeight) / 2;
+
+        const fontSize = getResponsiveFontSize(scene, configSudokuLayout.miskateFontSize);
+
+        scene.mistakeText.setFontSize(fontSize);
+        scene.mistakeText.setPosition(scene.gridContainer.x + 75, gridTop - 10);
     }
 }
 

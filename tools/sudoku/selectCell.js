@@ -12,19 +12,41 @@
 };
 
 const selectCell = (scene, row, col) => {
+
     if (!scene.selectedCell) {
         scene.selectedCell = { row: -1, col: -1 };
     }
 
-    const fillStyle = 0x7e95fd;
-
     clearHighlights(scene);
+
+    const fillColor = 0x7e95fd;
+    const mainAlpha = 0.65;
+    const secondAlpha = 0.4;
+    const thirdAlpha = 0.15;
 
     scene.selectedCell = { row, col };
 
     const cell = scene.cells[row][col];
     if (cell && cell.setFillStyle) {
-        cell.setFillStyle(0x7e95fd, 0.55);
+
+        cell.setFillStyle(fillColor, mainAlpha);
+    }
+
+
+    for (let r = 0; r < 9; r++) {
+        for (let c = 0; c < 9; c++) {
+            const cell2 = scene.cells[r] && scene.cells[r][c];
+            if (!cell2 || !cell2.setFillStyle) continue;
+
+
+            if (r === row || c === col) {
+
+                if (r === row && c === col) continue;
+
+
+                cell2.setFillStyle(fillColor, thirdAlpha);
+            }
+        }
     }
 
     const textObj = scene.texts[row][col];
@@ -34,16 +56,22 @@ const selectCell = (scene, row, col) => {
 
     const value = textObj.text;
 
+
     for (let r = 0; r < 9; r++) {
         for (let c = 0; c < 9; c++) {
             const t = scene.texts[r][c];
-            const cell2 = scene.cells[r][c];
+            const cell2 = scene.cells[r] && scene.cells[r][c];
 
             if (!t || !t.text || !cell2 || !cell2.setFillStyle) continue;
 
             if (t.text === value) {
-                const alpha = (r === row && c === col) ? 0.55 : 0.25;
-                cell2.setFillStyle(fillStyle, alpha);
+
+                if (r === row && c === col) {
+                    cell2.setFillStyle(fillColor, mainAlpha);
+                } else {
+
+                    cell2.setFillStyle(fillColor, secondAlpha);
+                }
             }
         }
     }

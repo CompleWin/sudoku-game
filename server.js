@@ -197,6 +197,32 @@ io.on('connection', (socket) => {
         }
     });
 
+    socket.on('playerMistakeLose', ({ roomId}) => {
+        const game = games[roomId];
+        if (!game) {
+            return;
+        }
+
+        if (!game.winner) {
+            const [p1, p2] = game.players;
+
+            const loserSocketId = socket.id;
+            const winnerSocketId = p1 === loserSocketId ? p2 : p1;
+
+            game.winner = winnerSocketId;
+
+            applyResultForSocket(io, winnerSocketId, USERS_FILE, users, 'win');
+            applyResultForSocket(io, loserSocketId, USERS_FILE, users, 'lose');
+
+            io.to(winnerSocketId).emit('gameResult', { result: 'win' });
+            io.to(loserSocketId).emit('gameResult', { result: 'lose' });
+
+            delete games[roomId];
+
+            console.log(`Game in room ${roomId} finished. Winner (opponent made too many mistakes): ${winnerSocketId}`);
+        }
+    })
+
     socket.on('disconnect', (reason) => {
         console.log('Client disconnected: ', socket.id, 'reason: ', reason);
 

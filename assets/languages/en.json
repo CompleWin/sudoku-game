@@ -21,7 +21,8 @@
     "lose": "Lose",
     "lost_connection": "Connection is LOST",
     "game_over": "Game Over!",
-    "time": "Game time: "
+    "time": "Game time: ",
+    "mistake": "Mistake: "
   },
   "welcome": {
     "welcome_text": "Welcome to Sudoku!\nEnter your nickname:",

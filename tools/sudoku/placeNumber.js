@@ -2,8 +2,12 @@
 import sendProgress from "../server/sendProgress.js";
 import configSudokuLayout from "../config/configSudokuLayout.js";
 import getResponsiveFontSize from "../responvisve/getResponsiveFontSize.js";
+import {Language} from "../../language.js";
+import checkErrors from "./checkErrors.js";
 
 const placeNumber = (scene, num) => {
+
+    if (scene.isGameOver) return;
 
     const { row, col } = scene.selectedCell;
 
@@ -36,6 +40,17 @@ const placeNumber = (scene, num) => {
 
         scene.texts[row][col] = text;
         scene.gridContainer.add(text);
+
+        if (!isCorrect) {
+            scene.mistakes += 1;
+            if (scene.mistakeText) {
+                scene.mistakeText.setText(`${Language.data["game"]["mistake"]}${scene.mistakes}/${scene.maxMistakes}`);
+            }
+
+            if (scene.mistakes >= scene.maxMistakes) {
+                checkErrors(scene);
+            }
+        }
     }
 
     sendProgress(scene);
