@@ -7,7 +7,6 @@ const selectCell = (scene, row, col) => {
 
         const prevCell = scene.cells[prevRow][prevCol];
         if (prevCell && prevCell.setFillStyle) {
-            // Возвращаем прозрачность
             prevCell.setFillStyle(0xffffff, 0);
         }
     }

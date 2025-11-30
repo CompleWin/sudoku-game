@@ -1,7 +1,7 @@
 ﻿import configSpriteScale from "../config/configSpriteScale.js";
 import getResponsiveScale from "../responvisve/getResponsiveScale.js";
 
-const createSpriteButton = (scene, atlasKey, textureKey, onClick) => {
+const createSpriteButton = (scene, atlasKey, textureKey, hoverAtlasKey, hoverKey, onClick) => {
     const baseScale = configSpriteScale.baseScale;
     const hoverScale = configSpriteScale.hoverScale;
 
@@ -13,8 +13,14 @@ const createSpriteButton = (scene, atlasKey, textureKey, onClick) => {
         .setInteractive({ useHandCursor: true })
         .setScale(standartScale);
 
-    img.on('pointerover', () => img.setScale(pointOnScale));
-    img.on('pointerout', () => img.setScale(standartScale));
+    img.on('pointerover', () => {
+        img.setScale(pointOnScale);
+        img.setTexture(hoverAtlasKey, hoverKey);
+    });
+    img.on('pointerout', () => {
+        img.setScale(standartScale);
+        img.setTexture(atlasKey, textureKey);
+    });
     img.on('pointerup', onClick);
 
     return img;

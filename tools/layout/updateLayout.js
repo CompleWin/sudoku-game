@@ -5,6 +5,10 @@ import sudokuGridLayout from "./layouts/sudokuGridLayout.js";
 import numberButtonsLayout from "./layouts/numberButtonsLayout.js";
 import configDifficultyButton from "../config/configDifficultyButton.js";
 import timerLayout from "./layouts/timerLayout.js";
+import welcomeTextLayout from "./layouts/welcomeTextLayout.js";
+import inputLayout from "./layouts/inputLayout.js";
+import confirmButtonLayout from "./layouts/confirmButtonLayout.js";
+import errorTextLayout from "./layouts/errorTextLayout.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -37,7 +41,23 @@ const updateLayout = (scene) => {
         scene.langButton.setOrigin(1, 0);
         scene.langButton.setPosition(width - paddingX, paddingY);
     }
-    
+
+    if (scene.welcomeText) {
+        welcomeTextLayout(scene);
+    }
+
+    if (scene.inputDom && scene.inputElement) {
+        inputLayout(scene);
+    }
+
+    if (scene.confirmButton) {
+        confirmButtonLayout(scene);
+    }
+
+    if (scene.errorText) {
+        errorTextLayout(scene);
+    }
+
     if (scene.menuButtons && scene.menuButtons.length > 0) {
         const totalButtons = scene.menuButtons.length;
         const stepY = getResponsiveFontSize(scene, configSpriteScale.baseStepY);
@@ -69,7 +89,6 @@ const updateLayout = (scene) => {
         const fontSize = getResponsiveFontSize(scene, 20);
         scene.backButton.setFontSize(fontSize);
     }
-
 
     if (scene.difficultyButtons && scene.difficultyButtons.length > 0) {
         const scale = getResponsiveScale(scene,1);

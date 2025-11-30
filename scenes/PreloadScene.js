@@ -10,7 +10,8 @@ export default class PreloadScene extends Phaser.Scene {
         
         this.load.json("lang", `assets/languages/${lang}.json`);
         this.load.image('bg_menu', '../assets/bg_solid.png');
-        
+
+
         this.load.atlas(
             'uiButtons',
             '../assets/ui-buttons.png',
@@ -19,8 +20,8 @@ export default class PreloadScene extends Phaser.Scene {
         
         this.load.atlas(
             'logo',
-            '../assets/logo.png',
-            '../assets/logo.json',
+            '../assets/logo2.png',
+            '../assets/logo2.json',
         )
         
         this.load.atlas(
@@ -28,7 +29,13 @@ export default class PreloadScene extends Phaser.Scene {
             '../assets/lang_small.png',
             '../assets/lang_small.json',
         )
-        
+
+        this.load.atlas(
+            'uiButtonsHover',
+            '../assets/ui-buttons-hover.png',
+            '../assets/ui-buttons-hover.json',
+        )
+
         this.load.image('playButton', '../assets/play-button.png');
         this.load.image('multiplayerButton', '../assets/multiplayer-button.png');
 

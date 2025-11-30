@@ -15,7 +15,7 @@ const createLogo = (scene) => {
     ).setOrigin(0.5);
 
     const scale = getResponsiveFontSize(scene, 1);
-    scene.titleSprite.setScale(configSpriteScale.titleBaseScale * scale);
+    scene.titleSprite.setScale(configSpriteScale.baseLogoScale * scale);
 }
 
 export default createLogo;

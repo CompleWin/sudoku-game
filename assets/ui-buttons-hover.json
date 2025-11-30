@@ -1,6 +1,6 @@
 {
 	"frames": {
-		"continue_en.png": {
+		"continue_hover_en.png": {
 			"frame": {
 				"x": 1,
 				"y": 1,
@@ -20,7 +20,7 @@
 				"h": 112
 			}
 		},
-		"continue_ru.png": {
+		"continue_hover_ru.png": {
 			"frame": {
 				"x": 1,
 				"y": 115,
@@ -40,7 +40,7 @@
 				"h": 112
 			}
 		},
-		"multiplayer_en.png": {
+		"multiplayer_en_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 229,
@@ -60,7 +60,7 @@
 				"h": 112
 			}
 		},
-		"multiplayer_ru.png": {
+		"multiplayer_ru_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 343,
@@ -80,7 +80,7 @@
 				"h": 112
 			}
 		},
-		"play_en.png": {
+		"play_en_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 457,
@@ -100,7 +100,7 @@
 				"h": 112
 			}
 		},
-		"play_ru.png": {
+		"play_ru_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 571,
@@ -120,7 +120,7 @@
 				"h": 112
 			}
 		},
-		"settings_en.png": {
+		"settings_en_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 685,
@@ -140,7 +140,7 @@
 				"h": 112
 			}
 		},
-		"settings_ru.png": {
+		"settings_ru_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 799,
@@ -160,7 +160,7 @@
 				"h": 112
 			}
 		},
-		"stats_en.png": {
+		"stats_en_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 913,
@@ -180,7 +180,7 @@
 				"h": 112
 			}
 		},
-		"stats_ru.png": {
+		"stats_ru_hover.png": {
 			"frame": {
 				"x": 1,
 				"y": 1027,

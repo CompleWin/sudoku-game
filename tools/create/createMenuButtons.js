@@ -9,7 +9,7 @@ const createMenuButtons = (scene) => {
     const menuItems = getConfigMenuItems(scene);
 
     menuItems.forEach((item) => {
-        const container = createSpriteButton(scene, item.atlasKey, item.key, item.onClick);
+        const container = createSpriteButton(scene, item.atlasKey, item.key, item.hoverAtlasKey, item.hoverKey, item.onClick);
         scene.menuButtons.push(container);
     });
 
