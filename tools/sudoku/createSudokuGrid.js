@@ -38,11 +38,6 @@ const createSudokuGrid = (scene) => {
 
             cell.setInteractive({ useHandCursor: true });
             cell.on('pointerup', () => {
-
-                if (scene.initialCells && scene.initialCells[row][col]) {
-                    return;
-                }
-
                 selectCell(scene, row, col);
             });
 

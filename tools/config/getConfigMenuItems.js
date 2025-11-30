@@ -31,16 +31,6 @@ const getConfigMenuItems = (scene) => {
         },
         {
             atlasKey: "uiButtons",
-            key: `settings_${currentLanguage}.png`,
-            scene: "",
-            hoverAtlasKey: 'uiButtonsHover',
-            hoverKey: `settings_${currentLanguage}_hover.png`,
-            onClick: () => {
-                scene.scene.start('');
-            }
-        },
-        {
-            atlasKey: "uiButtons",
             key: `stats_${currentLanguage}.png`,
             scene: "",
             hoverAtlasKey: 'uiButtonsHover',
