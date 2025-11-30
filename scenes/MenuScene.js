@@ -4,6 +4,7 @@ import autoLayoutEvent from "../tools/layout/autoLayoutEvent.js";
 import createMenuButtons from "../tools/create/createMenuButtons.js";
 import createLanguageChangeButton from "../tools/create/createLanguageChangeButton.js";
 import createLogo from "../tools/create/createLogo.js";
+import createNicknameText from "../tools/create/createNicknameText.js";
 
 export default class MenuScene extends Phaser.Scene {
 
@@ -16,6 +17,7 @@ export default class MenuScene extends Phaser.Scene {
         createLanguageChangeButton(this);
         createLogo(this);
         createMenuButtons(this);
+        createNicknameText(this);
         autoLayoutEvent(this, updateLayout);
     }
 }

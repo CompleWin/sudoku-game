@@ -100,22 +100,41 @@ io.on('connection', (socket) => {
         console.log(`Socket ${socket.id} connected without known userId`);
     }
 
-    socket.on('findGame', ({difficulty}) => {
+    socket.on('findGame', ({ difficulty }) => {
 
         if (!waitingPlayers[difficulty]) {
             waitingPlayers[difficulty] = [];
         }
 
         const queue = waitingPlayers[difficulty];
+        const currentUserId = socket.data.userId;
 
-        if (queue.length > 0) {
-            const opponentSocket = queue.shift();
+        let opponentIndex = -1;
+
+        if (currentUserId) {
+            for (let i = 0; i < queue.length; i++) {
+                const candidate = queue[i];
+                const candidateUserId = candidate.data && candidate.data.userId;
+
+                if (!candidateUserId || candidateUserId !== currentUserId) {
+                    opponentIndex = i;
+                    break;
+                }
+            }
+        } else {
+            if (queue.length > 0) {
+                opponentIndex = 0;
+            }
+        }
+
+        if (opponentIndex !== -1) {
+            const opponentSocket = queue.splice(opponentIndex, 1)[0];
             const roomId = `room_${opponentSocket.id}_${socket.id}`;
 
             socket.join(roomId);
             opponentSocket.join(roomId);
 
-            const {board, solution} = generateSudoku(difficulty);
+            const { board, solution } = generateSudoku(difficulty);
 
             games[roomId] = {
                 players: [opponentSocket.id, socket.id],
@@ -132,16 +151,25 @@ io.on('connection', (socket) => {
             });
 
             console.log(`Game started in room ${roomId} (difficulty ${difficulty})`);
-
         } else {
-            queue.push(socket);
+            if (!queue.includes(socket)) {
+                queue.push(socket);
+            }
+
             socket.emit('waitingForOpponent');
-            console.log(`Socket ${socket.id} is waiting for opponent (${difficulty})`);
+
+            if (currentUserId) {
+                console.log(`Socket ${socket.id} (userId=${currentUserId}) is waiting for opponent (${difficulty})`);
+            } else {
+                console.log(`Socket ${socket.id} is waiting for opponent (${difficulty})`);
+            }
         }
     });
 
+
     socket.on('progressUpdate', ({roomId, emptyCells}) => {
-        socket.to(roomId).emit('opponentProgress', {emptyCells});
+        const nickname = socket.data.nickname || 'Соперник';
+        socket.to(roomId).emit('opponentProgress', { emptyCells, nickname });
     });
 
     socket.on('boardSolved', ({roomId}) => {

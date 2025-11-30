@@ -9,6 +9,7 @@ import welcomeTextLayout from "./layouts/welcomeTextLayout.js";
 import inputLayout from "./layouts/inputLayout.js";
 import confirmButtonLayout from "./layouts/confirmButtonLayout.js";
 import errorTextLayout from "./layouts/errorTextLayout.js";
+import configFont from "../config/configFont.js";
 
 const updateLayout = (scene) => {
     const { width, height } = scene.scale;
@@ -112,6 +113,12 @@ const updateLayout = (scene) => {
 
     if (scene.timerText) {
         timerLayout(scene);
+    }
+
+    if (scene.currentUserText && scene.currentUserText.text) {
+        const fontSize = getResponsiveFontSize(scene, configFont.nicknameFontSize);
+        scene.currentUserText.setFontSize(fontSize);
+        scene.currentUserText.setPosition(width - 20, height - 20);
     }
 }
 

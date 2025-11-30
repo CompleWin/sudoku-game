@@ -31,6 +31,10 @@ const configFont = {
     errorFontColor: '#ff0000',
     errorFontAlign: 'left',
 
+    nicknameFontSize: 16,
+    nicknameFontColor: '#ffffff',
+    nicknameAlign: 'right',
+
 };
 
 export default configFont;
