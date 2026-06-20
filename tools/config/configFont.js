@@ -1,12 +1,12 @@
 ﻿
 const configFont = {
-    defaultFontFamily: "Joystix Monospace",
+    defaultFontFamily: '"Joystix Monospace", monospace',
     textFontSize: 24,
 
-    cellFontFamily: "Joystix Monospace",
+    cellFontFamily: '"Joystix Monospace", monospace',
     cellFontSize: 24,
 
-    buttonsFontFamily: 'Joystix Monospace',
+    buttonsFontFamily: '"Joystix Monospace", monospace',
     buttonsFontSize: 24,
     buttonsFontColor: '#ffffff',
 

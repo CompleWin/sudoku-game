@@ -1,4 +1,4 @@
-﻿{
+{
   "menu": {
     "title": "Sudoku",
     "single_player": "Singleplayer",
@@ -28,5 +28,15 @@
     "welcome_text": "Welcome to Sudoku!\nEnter your nickname:",
     "input_placeholder": "your nickname",
     "confirm_text": "next"
+  },
+  "stats": {
+    "title": "Multiplayer stats",
+    "nickname": "Nickname: ",
+    "wins": "Wins: ",
+    "losses": "Losses: ",
+    "games": "Games played: ",
+    "winrate": "Win rate: ",
+    "loading": "Loading...",
+    "empty": "Play an online match\nto see your statistics here"
   }
 }

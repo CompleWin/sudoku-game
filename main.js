@@ -42,4 +42,18 @@ const config = {
     }
 };
 
-const game = new Phaser.Game(config);
+// Грузим веб-шрифт до первого рендера Phaser: на устройствах без установленного
+// Joystix canvas иначе нарисует текст запасным шрифтом и не перерисует его.
+const startGame = () => new Phaser.Game(config);
+
+if (document.fonts && document.fonts.load) {
+    Promise.all([
+        document.fonts.load('16px "Joystix Monospace"'),
+        document.fonts.load('bold 16px "Joystix Monospace"')
+    ])
+        .then(() => document.fonts.ready)
+        .then(startGame)
+        .catch(startGame);
+} else {
+    startGame();
+}
