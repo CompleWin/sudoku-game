@@ -12,7 +12,7 @@ import applyResultForSocket from "./tools/users/applyResultForSocket.js";
 
 
 
-const PORT = 80;
+const PORT = process.env.PORT || 80;
 const COOKIES_AGE = 1000 * 60 * 60 * 24 * 365;
 
 const __filename = fileURLToPath(import.meta.url);
