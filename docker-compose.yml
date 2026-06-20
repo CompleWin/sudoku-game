@@ -1,11 +1,8 @@
-﻿
 services:
-  sudoku-game:
+  app:
     build: .
-    container_name: sudoku-game
     ports:
-      - "8080:80"
+      - "80:80"
     environment:
       - NODE_ENV=production
-    volumes:
-      - ./users.json:/app/users.json
+    restart: always
