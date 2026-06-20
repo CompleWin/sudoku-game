@@ -30,6 +30,8 @@ loadUsers(USERS_FILE, users);
 app.use(express.json());
 app.use(express.static(__dirname));
 
+app.get('/health', (req, res) => res.status(200).send('ok'));
+
 app.post('/api/register', (req, res) => {
     const { nickname } = req.body || {};
 
